@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <title>enumerator</title>
+    <style>
+        body, html {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        #display {
+            font-size: 48px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #rollButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #rollButton:hover {
+            background-color: #0056b3;
+        }
+
+        .about-link {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .about-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="display">0</div>
+    <button id="rollButton">停!</button>
+
+    <!-- 添加关于链接 -->
+    <a href="https://www.baidu.com" target="_blank" class="about-link">关于 闽ICP报备11768097 第3小组</a>
+
+    <script>
+        var isRolling = true;
+        var display = document.getElementById('display');
+        var rollButton = document.getElementById('rollButton');
+
+        function rollNumber() {
+            if (!isRolling) return;
+
+            var number = Math.floor(Math.random() * 52) + 1;
+            display.textContent = number;
+
+            // 使用 setTimeout 来实现连续跳动效果
+            setTimeout(rollNumber, 100);
+        }
+
+        rollButton.addEventListener('click', function() {
+            isRolling = !isRolling;
+            if (isRolling) {
+                rollNumber(); // 重新开始点名
+                this.textContent = '停!';
+            } else {
+                this.textContent = '开始';
+            }
+        });
+
+        // 初始启动点名
+        rollNumber();
+    </script>
+</body>
+</html>
